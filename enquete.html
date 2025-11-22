@@ -7,6 +7,60 @@
   <title>Enquete — Força Estudantil</title>
   <link rel="shortcut icon" href="imagens/logo.png" type="image/png">
   <link rel="stylesheet" href="style.css">
+
+  <!-- ESTILO DO POPUP -->
+  <style>
+    .popup-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.55);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .3s;
+    }
+
+    .popup-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .popup-box {
+      background: white;
+      padding: 28px;
+      border-radius: 14px;
+      max-width: 360px;
+      text-align: center;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, .18);
+      animation: pop .28s ease;
+    }
+
+    @keyframes pop {
+      0% { transform: scale(.8); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .popup-title {
+      font-size: 1.4rem;
+      color: var(--purple-700);
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+
+    .popup-btn {
+      background: linear-gradient(90deg, var(--pink-400), var(--purple-600));
+      padding: 12px 18px;
+      border: none;
+      color: white;
+      border-radius: 10px;
+      margin-top: 18px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+  </style>
 </head>
 
 <body>
@@ -19,7 +73,7 @@
       <nav class="navbar">
         <a href="index.html">INÍCIO</a>
         <a href="index.html#sobre">INTEGRANTES</a>
-        <a href="https://www.instagram.com/gremiofestudantil/" target="_blank" rel="noopener">CONTATO</a>
+        <a href="https://www.instagram.com/gremiofestudantil/" target="_blank">CONTATO</a>
       </nav>
       <button id="menu-toggle" aria-label="Abrir menu">☰</button>
     </div>
@@ -32,21 +86,15 @@
         Responda a enquete abaixo — suas respostas serão enviadas diretamente para nossa equipe.
       </p>
 
-      <!-- FORMULARIO COM FORMSUBMIT -->
-      <form action="https://formsubmit.co/gestudantil39@gmail.com" 
-            method="POST"
-            style="margin-top:18px;background:var(--card);padding:18px;border-radius:12px;box-shadow:var(--shadow)">
+      <!-- FORMULÁRIO AJAX -->
+      <form id="enqueteForm"
+        action="https://formsubmit.co/ajax/gestudantil39@gmail.com"
+        method="POST"
+        style="margin-top:18px;background:var(--card);padding:18px;border-radius:12px;box-shadow:var(--shadow)">
 
-        <!-- REMOVER CAPTCHA DO FORMSUBMIT -->
         <input type="hidden" name="_captcha" value="false">
-
-        <!-- TÍTULO DA MENSAGEM NO E-MAIL -->
         <input type="hidden" name="_subject" value="Nova resposta da Enquete do Grêmio!">
 
-        <!-- REDIRECIONAR PARA A PÁGINA DE SUCESSO -->
-        <input type="hidden" name="_next" value="https://niel30538.github.io/gremio-site/index.html"> <!-- você pode trocar -->
-
-        <!-- PERGUNTA 1 -->
         <label style="display:block;margin-bottom:12px">
           <strong>1) Qual evento você prefere?</strong><br>
           <select name="evento_preferido" required
@@ -59,7 +107,6 @@
           </select>
         </label>
 
-        <!-- PERGUNTA 2 -->
         <label style="display:block;margin-bottom:12px">
           <strong>2) Você gostaria de oficinas de:</strong><br>
 
@@ -70,14 +117,12 @@
 
         </label>
 
-        <!-- PERGUNTA 3 -->
         <label style="display:block;margin-bottom:12px">
           <strong>3) O que podemos melhorar na escola?</strong><br>
           <textarea name="sugestao" rows="4"
             style="width:100%;padding:8px;border-radius:8px;border:1px solid #e6e2ef;margin-top:8px"></textarea>
         </label>
 
-        <!-- BOTÕES -->
         <div style="display:flex;gap:12px;align-items:center;margin-top:12px">
           <button type="submit" class="btn-primary">Enviar respostas</button>
           <button type="reset"
@@ -95,6 +140,39 @@
       <a class="footer-link" href="index.html">Voltar ao site</a>
     </div>
   </footer>
+
+  <!-- POPUP -->
+  <div class="popup-overlay" id="popupSucesso">
+    <div class="popup-box">
+      <div class="popup-title">✔ Resposta enviada!</div>
+      <p>Obrigado por participar da nossa enquete! 😄</p>
+      <button class="popup-btn" onclick="fecharPopup()">OK</button>
+    </div>
+  </div>
+
+  <!-- SCRIPT AJAX -->
+  <script>
+    const form = document.getElementById('enqueteForm');
+    const popup = document.getElementById('popupSucesso');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault(); // impedir redirecionamento
+
+      const formData = new FormData(form);
+
+      await fetch(form.action, {
+        method: "POST",
+        body: formData
+      });
+
+      popup.classList.add('active'); // mostrar popup
+      form.reset();
+    });
+
+    function fecharPopup() {
+      popup.classList.remove('active');
+    }
+  </script>
 
 </body>
 </html>
