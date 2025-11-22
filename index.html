@@ -1,197 +1,159 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-    <meta charset="UTF-8">
-    
-    
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Site de Membros</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Força Estudantil</title>
+    <link rel="shortcut icon" href="imagens/logo.png" type="image/png">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <!-- Header -->
     <header>
-        <div class="logo-container">
-            <img src="imagens/logo.png" alt="Logo Força Estudantil" class="logo-image">
-            <span class="logo-text">  FORÇA ESTUDANTIL</span>
-        </div>
+        <div class="header-inner">
+            <a class="brand" href="#">
+                <img src="imagens/logo.png" alt="Logo Força Estudantil" class="logo-image">
+                <span class="brand-text">FORÇA ESTUDANTIL</span>
+            </a>
+
             <nav class="navbar">
-                <a href="#inicio">INÍCIO</a>
-                <a href="#">SOBRE</a>
-                 <a href="https://www.instagram.com/gremiofestudantil/" target="_blank">CONTATO</a>
+                <a href="#">INÍCIO</a>
+                <a href="#sobre">SOBRE</a>
+                <a href="enquete.html">ENQUETE</a>
+                <a href="https://www.instagram.com/gremiofestudantil/" target="_blank" rel="noopener">CONTATO</a>
             </nav>
+            <button id="menu-toggle" aria-label="Abrir menu">☰</button>
+        </div>
     </header>
 
-    <!-- Carrossel -->
-        <section class="carousel-section">
-            <div class="carousel-container" id="carousel">
-                <img src="imagens/carrosel 1.jpg" alt="Slide 1" class="carousel-image active">
-                <img src="imagens/carrosel 2.png" alt="Slide 2" class="carousel-image">
-                <img src="imagens/carrosel 3 (2).png" alt="Slide 3" class="carousel-image">
-                <img src="imagens/carrosel 4.jpg" alt="Slide 4" class="carousel-image">
-    </div>
-
-        <!-- Botões de navegação -->
-        <button class="carousel-button prev" onclick="prevSlide()">
-            <svg class="icon" viewBox="0 0 24 24">
-                <polyline points="15 18 9 12 15 6"></polyline>
-            </svg>
-        </button>
-        <button class="carousel-button next" onclick="nextSlide()">
-            <svg class="icon" viewBox="0 0 24 24">
-                <polyline points="9 18 15 12 9 6"></polyline>
-            </svg>
-        </button>
-
-        <!-- Indicadores -->
-        <div class="carousel-indicators">
-            <button class="indicator active" onclick="goToSlide(0)"></button>
-            <button class="indicator" onclick="goToSlide(1)"></button>
-            <button class="indicator" onclick="goToSlide(2)"></button>
-            <button class="indicator" onclick="goToSlide(3)"></button>
-        </div>
-    </section>
-
-    <!-- Seção de Enquete -->
-    <section id="enquete" class="enquete-section">
-
-        <div class="enquete-container">
-            <div class="enquete-text">
-                <h2>Nos de sua opinião</h2>
-                <p>Queremos saber sua opinião! Participe da nossa enquete e ajude a melhorar o Grêmio.</p>
+    <main>
+        <!-- CARROSSEL -->
+        <section class="carousel-section" aria-label="Carrossel de imagens">
+            <div class="carousel" id="carousel">
+                <!-- Use seus arquivos reais aqui (aspas para nomes com espaço) -->
+                <div class="slide active" style="background-image: url('imagens/carrosel 1.jpg')"></div>
+                <div class="slide" style="background-image: url('imagens/carrosel 2.png')"></div>
+                <div class="slide" style="background-image: url('imagens/carrosel 3 (2).png')"></div>
+                <div class="slide" style="background-image: url('imagens/carrosel 4.jpg')"></div>
             </div>
-            <button id="btn-enquete" class="enquete-button">RESPONDER ENQUETE</button>
 
-        </div>
-    </section>
+            <button class="carousel-btn prev" aria-label="Slide anterior" id="prevBtn">‹</button>
+            <button class="carousel-btn next" aria-label="Próximo slide" id="nextBtn">›</button>
 
-    <!-- Seção de Membros -->
-    <section class="members-section">
-        <div class="members-container">
-            <div class="members-grid">
-                <div class="member-card">
-                    <img src="imagens/membro1.jpg" alt="Membro 1" class="member-image">
-                    <div class="member-info">
-                        <h3>Presidente</h3>
-                        <p>Eu sou o Presidente do Grêmio e sou responsável por representar o grupo e garantir que todas as ações sejam feitas de forma organizada. Trabalho para unir os alunos e buscar o melhor para todos.</p>
-                    </div>
+            <div class="carousel-indicators" id="carouselIndicators"></div>
+        </section>
+
+        <!-- ENQUETE (chamada) -->
+        <section id="enquete" class="enquete-section">
+            <div class="enquete-inner">
+                <div>
+                    <h2>Nos dê sua opinião</h2>
+                    <p>Participe da enquete e nos ajude a planejar ações melhores para a escola.</p>
                 </div>
-
-                <div class="member-card">
-                    <img src="imagens/membro2.jpg" alt="Membro 2" class="member-image">
-                    <div class="member-info">
-                        <h3>Vice-Presidente</h3>
-                        <p>Eu sou o Vice-Presidente do Grêmio e ajudo o Presidente nas decisões e projetos. Estou sempre pronto para apoiar o grupo e assumir responsabilidades quando for preciso..</p>
-                    </div>
-                </div>
-
-                <div class="member-card">
-                    <img src="imagens/membro3.jpg" alt="Membro 3" class="member-image">
-                    <div class="member-info">
-                        <h3>Secretária</h3>
-                        <p>Eu sou a Secretária do Grêmio e cuido das anotações, reuniões e documentos. Meu papel é manter tudo organizado e garantir que nada se perca no dia a dia do grup</p>
-                    </div>
-                </div>
-
-                <div class="member-card">
-                    <img src="imagens/membro4.jpg" alt="Membro 4" class="member-image">
-                    <div class="member-info">
-                        <h3>Diretora de Assistencia da Mulher</h3>
-                        <p>Eu sou a Diretora de Defesa da Mulher do Grêmio e busco garantir o respeito e a igualdade dentro da escola. Trabalho para conscientizar e apoiar as alunas em todas as situações.</p>
-                    </div>
-                </div>
-
-                <div class="member-card">
-                    <img src="imagens/membro5.jpg" alt="Membro 5" class="member-image">
-                    <div class="member-info">
-                        <h3>Diretor de Esportes</h3>
-                        <p>Eu sou o Diretor de Esportes do Grêmio e sou responsável por incentivar a prática esportiva na escola. Organizo torneios, jogos e atividades que promovem união e saúde entre os alunos.</p>
-                    </div>
-                </div>
-
-                <div class="member-card">
-                    <img src="imagens/membro6.jpg" alt="Membro 6" class="member-image">
-                    <div class="member-info">
-                        <h3>Diretor de Tecnologia</h3>
-                        <p>Eu sou o Diretor/Suplente de Tecnologia do Grêmio e ajudo o grupo com as ferramentas digitais. Cuido da parte online e contribuo com ideias tecnológicas para melhorar nossos projetos.</p>
-                    </div>
-                </div>
-
-                <div class="member-card">
-                    <img src="imagens/membro7.jpg" alt="Membro 7" class="member-image">
-                    <div class="member-info">
-                        <h3>Diretora de Comunicação</h3>
-                        <p>Eu sou a Diretora de Comunicação do Grêmio e sou responsável por divulgar nossas ações. Gosto de manter todos informados e incentivar a participação dos colegas.</p>
-                    </div>
-                </div>
-
-                <div class="member-card">
-                    <img src="imagens/membro8.jpg" alt="Membro 8" class="member-image">
-                    <div class="member-info">
-                        <h3>Suplente Serviços Gerais</h3>
-                        <p>Eu sou responsável pelos Serviços Gerais do Grêmio e ajudo a manter tudo em ordem. Trabalho para deixar o ambiente limpo e organizado para todos os alunos</p>
-                    </div>
-                </div>
-                <div class="member-card">
-                    <img src="imagens/membro9.jpg" alt="Membro 9" class="member-image">
-                    <div class="member-info">
-                        <h3>Suplente de Meio Ambiente</h3>
-                        <p>Eu sou o Diretor de Meio Ambiente do Grêmio e procuro incentivar o cuidado com a natureza. Promovo campanhas e ações que ensinam a importância de preservar o planeta</p>
-                    </div>
+                <a class="btn-primary" href="enquete.html">RESPONDER ENQUETE</a>
             </div>
-                            <div class="member-card">
-                    <img src="imagens/membro10.jpg" alt="Membro 10" class="member-image">
-                    <div class="member-info">
-                        <h3>Diretora da cultura</h3>
-                        <p>Eu sou a Diretora Cultural do Grêmio e tenho como missão valorizar a arte, a música e a cultura na escola. Promovo eventos e atividades que estimulam a criatividade e a expressão dos alunos.</p>
-                    </div>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Footer -->
+        <!-- SOBRE / Integrantes -->
+        <section id="sobre" class="members-section">
+            <div class="container">
+                <h1 class="section-title">Integrantes</h1>
+
+                <div class="members-grid">
+                    <!-- Repita / modifique os cards conforme necessário -->
+                    <article class="member-card">
+                        <img src="imagens/membro1.jpg" alt="Presidente" class="member-image">
+                        <div class="member-body">
+                            <h3>Presidente</h3>
+                            <p>Responsável por representar o Grêmio e organizar as ações. Busca unir os alunos.</p>
+                        </div>
+                    </article>
+
+                    <article class="member-card">
+                        <img src="imagens/membro2.jpg" alt="Vice-Presidente" class="member-image">
+                        <div class="member-body">
+                            <h3>Vice-Presidente</h3>
+                            <p>Apoia o presidente nas decisões e assume responsabilidades quando necessário.</p>
+                        </div>
+                    </article>
+
+                    <article class="member-card">
+                        <img src="imagens/membro3.jpg" alt="Secretária" class="member-image">
+                        <div class="member-body">
+                            <h3>Secretária</h3>
+                            <p>Cuida de documentos, anotações e organização administrativa do Grêmio.</p>
+                        </div>
+                    </article>
+
+                    <article class="member-card">
+                        <img src="imagens/membro4.jpg" alt="Diretora de Defesa da Mulher" class="member-image">
+                        <div class="member-body">
+                            <h3>Diretora de Defesa da Mulher</h3>
+                            <p>Promove igualdade e respeito, apoiando e conscientizando as alunas.</p>
+                        </div>
+                    </article>
+
+                    <article class="member-card">
+                        <img src="imagens/membro5.jpg" alt="Diretor de Esportes" class="member-image">
+                        <div class="member-body">
+                            <h3>Diretor de Esportes</h3>
+                            <p>Organiza torneios e incentiva práticas esportivas entre os alunos.</p>
+                        </div>
+                    </article>
+
+                    <article class="member-card">
+                        <img src="imagens/membro6.jpg" alt="Diretor de Tecnologia" class="member-image">
+                        <div class="member-body">
+                            <h3>Diretor de Tecnologia</h3>
+                            <p>Auxilia com ferramentas digitais e soluções para projetos do Grêmio.</p>
+                        </div>
+                    </article>
+
+                    <article class="member-card">
+                        <img src="imagens/membro7.jpg" alt="Diretora de Comunicação" class="member-image">
+                        <div class="member-body">
+                            <h3>Diretora de Comunicação</h3>
+                            <p>Responsável por divulgar ações e manter todos os alunos informados.</p>
+                        </div>
+                    </article>
+
+                    <article class="member-card">
+                        <img src="imagens/membro8.jpg" alt="Suplente Serviços Gerais" class="member-image">
+                        <div class="member-body">
+                            <h3>Suplente Serviços Gerais</h3>
+                            <p>Ajuda na organização e manutenção do ambiente escolar.</p>
+                        </div>
+                    </article>
+
+                    <article class="member-card">
+                        <img src="imagens/membro9.jpg" alt="Suplente Meio Ambiente" class="member-image">
+                        <div class="member-body">
+                            <h3>Suplente Meio Ambiente</h3>
+                            <p>Promove ações de cuidado com o meio ambiente e sustentabilidade.</p>
+                        </div>
+                    </article>
+
+                    <article class="member-card">
+                        <img src="imagens/membro10.jpg" alt="Diretora da Cultura" class="member-image">
+                        <div class="member-body">
+                            <h3>Diretora da Cultura</h3>
+                            <p>Promove atividades culturais, arte e música na escola.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
     <footer>
-        <p>&copy; 2025 Site de Membros. Todos os direitos reservados.</p>
+        <div class="footer-inner">
+            <p>&copy; 2025 Força Estudantil. Todos os direitos reservados.</p>
+            <a href="enquete.html" class="footer-link">Responder enquete</a>
+        </div>
     </footer>
 
-    <script>
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.carousel-image');
-        const indicators = document.querySelectorAll('.indicator');
-        const totalSlides = slides.length;
-
-        // Auto-advance carousel every 5 seconds
-        setInterval(() => {
-            currentSlide = (currentSlide + 1) % totalSlides;
-            updateCarousel();
-        }, 5000);
-
-        function nextSlide() {
-            currentSlide = (currentSlide + 1) % totalSlides;
-            updateCarousel();
-        }
-
-        function prevSlide() {
-            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-            updateCarousel();
-        }
-
-        function goToSlide(index) {
-            currentSlide = index;
-            updateCarousel();
-        }
-
-        function updateCarousel() {
-            slides.forEach((slide, index) => {
-                slide.classList.toggle('active', index === currentSlide);
-            });
-
-            indicators.forEach((indicator, index) => {
-                indicator.classList.toggle('active', index === currentSlide);
-            });
-        }
-    </script>
     <script src="script.js"></script>
-
 </body>
+
 </html>
