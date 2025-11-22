@@ -85,3 +85,5 @@ document.addEventListener('DOMContentLoaded', () => {
         clearInterval(intervalId);
     }
 });
+
+// End of script.js

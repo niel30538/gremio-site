@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Enquete — Força Estudantil</title>
-  <link rel="shortcut icon" href="imagens/logo.png" type="image/png">
+  <link rel="shortcut icon" href="/mnt/data/logo.png" type="image/png">
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
   <header>
     <div class="header-inner">
       <a class="brand" href="index.html">
-        <img src="imagens/logo.png" alt="Logo" class="logo-image">
+        <img src="/mnt/data/logo.png" alt="Logo" class="logo-image">
         <span class="brand-text">FORÇA ESTUDANTIL</span>
       </a>
       <nav class="navbar">
@@ -26,12 +28,15 @@
   <main style="margin-top:80px;padding:26px;">
     <div class="container" style="max-width:800px;margin:0 auto;">
       <h1 style="color:var(--purple-700)">Enquetes — Participe</h1>
-      <p style="color:var(--muted)">Responda as questões abaixo — as respostas são armazenadas localmente no seu navegador (sem coletar dados sensíveis).</p>
+      <p style="color:var(--muted)">Responda as questões abaixo — as respostas são armazenadas localmente no seu
+        navegador (sem coletar dados sensíveis).</p>
 
-      <form id="surveyForm" style="margin-top:18px;background:var(--card);padding:18px;border-radius:12px;box-shadow:var(--shadow)">
+      <form id="surveyForm"
+        style="margin-top:18px;background:var(--card);padding:18px;border-radius:12px;box-shadow:var(--shadow)">
         <label style="display:block;margin-bottom:12px">
           <strong>1) Qual o evento que você prefere?</strong><br>
-          <select id="q1" required style="margin-top:8px;padding:10px;border-radius:8px;width:100%;border:1px solid #e6e2ef">
+          <select id="q1" required
+            style="margin-top:8px;padding:10px;border-radius:8px;width:100%;border:1px solid #e6e2ef">
             <option value="">Escolha...</option>
             <option>Arraial</option>
             <option>Feira Cultural</option>
@@ -50,15 +55,18 @@
 
         <label style="display:block;margin-bottom:12px">
           <strong>3) O que podemos melhorar na escola?</strong><br>
-          <textarea id="q3" rows="4" style="width:100%;padding:8px;border-radius:8px;border:1px solid #e6e2ef;margin-top:8px"></textarea>
+          <textarea id="q3" rows="4"
+            style="width:100%;padding:8px;border-radius:8px;border:1px solid #e6e2ef;margin-top:8px"></textarea>
         </label>
 
         <div style="display:flex;gap:12px;align-items:center;margin-top:12px">
           <button type="submit" class="btn-primary">Enviar respostas</button>
-          <button type="button" id="clearBtn" style="background:#fff;border:1px solid #eee;padding:10px;border-radius:8px;cursor:pointer">Limpar</button>
+          <button type="button" id="clearBtn"
+            style="background:#fff;border:1px solid #eee;padding:10px;border-radius:8px;cursor:pointer">Limpar</button>
         </div>
 
-        <div id="thanks" style="display:none;margin-top:14px;color:var(--purple-700);font-weight:700">Obrigado! Sua resposta foi registrada.</div>
+        <div id="thanks" style="display:none;margin-top:14px;color:var(--purple-700);font-weight:700">Obrigado! Sua
+          resposta foi registrada.</div>
       </form>
 
       <section style="margin-top:18px">
@@ -83,12 +91,12 @@
       const thanks = document.getElementById('thanks');
       const clearBtn = document.getElementById('clearBtn');
 
-      function renderResponses(){
+      function renderResponses() {
         const data = JSON.parse(localStorage.getItem('forca_enquetes') || '[]');
-        if(!data.length){ responsesEl.innerHTML = '<em>Nenhuma resposta ainda.</em>'; return; }
-        responsesEl.innerHTML = data.map((r,i) => 
+        if (!data.length) { responsesEl.innerHTML = '<em>Nenhuma resposta ainda.</em>'; return; }
+        responsesEl.innerHTML = data.map((r, i) =>
           `<div style="padding:8px;border-bottom:1px solid #f0eef6">
-            <strong>#${i+1}</strong> — <small style="color:#666">${new Date(r.ts).toLocaleString()}</small>
+            <strong>#${i + 1}</strong> — <small style="color:#666">${new Date(r.ts).toLocaleString()}</small>
             <div><strong>Evento:</strong> ${r.q1 || '—'}</div>
             <div><strong>Oficinas:</strong> ${r.q2.length ? r.q2.join(', ') : '—'}</div>
             <div><strong>Sugestão:</strong> ${r.q3 || '—'}</div>
@@ -103,15 +111,15 @@
 
         const data = JSON.parse(localStorage.getItem('forca_enquetes') || '[]');
         data.unshift({ q1, q2, q3, ts: Date.now() });
-        localStorage.setItem('forca_enquetes', JSON.stringify(data.slice(0,50))); // keep up to 50
+        localStorage.setItem('forca_enquetes', JSON.stringify(data.slice(0, 50))); // keep up to 50
         thanks.style.display = 'block';
-        setTimeout(()=>{ thanks.style.display='none' }, 2500);
+        setTimeout(() => { thanks.style.display = 'none' }, 2500);
         form.reset();
         renderResponses();
       });
 
       clearBtn.addEventListener('click', () => {
-        if(confirm('Limpar respostas salvas no navegador?')) {
+        if (confirm('Limpar respostas salvas no navegador?')) {
           localStorage.removeItem('forca_enquetes');
           renderResponses();
         }
@@ -121,4 +129,5 @@
     });
   </script>
 </body>
+
 </html>
