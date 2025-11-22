@@ -27,15 +27,29 @@
 
   <main style="margin-top:80px;padding:26px;">
     <div class="container" style="max-width:800px;margin:0 auto;">
-      <h1 style="color:var(--purple-700)">Enquetes — Participe</h1>
-      <p style="color:var(--muted)">Responda as questões abaixo — as respostas são armazenadas localmente no seu
-        navegador (sem coletar dados sensíveis).</p>
+      <h1 style="color:var(--purple-700)">Enquete — Participe</h1>
+      <p style="color:var(--muted)">
+        Responda a enquete abaixo — suas respostas serão enviadas diretamente para nossa equipe.
+      </p>
 
-      <form id="surveyForm"
-        style="margin-top:18px;background:var(--card);padding:18px;border-radius:12px;box-shadow:var(--shadow)">
+      <!-- FORMULARIO COM FORMSUBMIT -->
+      <form action="https://formsubmit.co/gestudantil39@gmail.com" 
+            method="POST"
+            style="margin-top:18px;background:var(--card);padding:18px;border-radius:12px;box-shadow:var(--shadow)">
+
+        <!-- REMOVER CAPTCHA DO FORMSUBMIT -->
+        <input type="hidden" name="_captcha" value="false">
+
+        <!-- TÍTULO DA MENSAGEM NO E-MAIL -->
+        <input type="hidden" name="_subject" value="Nova resposta da Enquete do Grêmio!">
+
+        <!-- REDIRECIONAR PARA A PÁGINA DE SUCESSO -->
+        <input type="hidden" name="_next" value="https://google.com"> <!-- você pode trocar -->
+
+        <!-- PERGUNTA 1 -->
         <label style="display:block;margin-bottom:12px">
-          <strong>1) Qual o evento que você prefere?</strong><br>
-          <select id="q1" required
+          <strong>1) Qual evento você prefere?</strong><br>
+          <select name="evento_preferido" required
             style="margin-top:8px;padding:10px;border-radius:8px;width:100%;border:1px solid #e6e2ef">
             <option value="">Escolha...</option>
             <option>Arraial</option>
@@ -45,34 +59,33 @@
           </select>
         </label>
 
+        <!-- PERGUNTA 2 -->
         <label style="display:block;margin-bottom:12px">
           <strong>2) Você gostaria de oficinas de:</strong><br>
-          <label><input type="checkbox" name="q2" value="Música"> Música</label><br>
-          <label><input type="checkbox" name="q2" value="Programação"> Programação</label><br>
-          <label><input type="checkbox" name="q2" value="Arte"> Arte</label><br>
-          <label><input type="checkbox" name="q2" value="Esportes"> Esportes</label>
+
+          <label><input type="checkbox" name="oficinas[]" value="Música"> Música</label><br>
+          <label><input type="checkbox" name="oficinas[]" value="Programação"> Programação</label><br>
+          <label><input type="checkbox" name="oficinas[]" value="Arte"> Arte</label><br>
+          <label><input type="checkbox" name="oficinas[]" value="Esportes"> Esportes</label>
+
         </label>
 
+        <!-- PERGUNTA 3 -->
         <label style="display:block;margin-bottom:12px">
           <strong>3) O que podemos melhorar na escola?</strong><br>
-          <textarea id="q3" rows="4"
+          <textarea name="sugestao" rows="4"
             style="width:100%;padding:8px;border-radius:8px;border:1px solid #e6e2ef;margin-top:8px"></textarea>
         </label>
 
+        <!-- BOTÕES -->
         <div style="display:flex;gap:12px;align-items:center;margin-top:12px">
           <button type="submit" class="btn-primary">Enviar respostas</button>
-          <button type="button" id="clearBtn"
+          <button type="reset"
             style="background:#fff;border:1px solid #eee;padding:10px;border-radius:8px;cursor:pointer">Limpar</button>
         </div>
 
-        <div id="thanks" style="display:none;margin-top:14px;color:var(--purple-700);font-weight:700">Obrigado! Sua
-          resposta foi registrada.</div>
       </form>
 
-      <section style="margin-top:18px">
-        <h3 style="margin-bottom:8px;color:var(--purple-700)">Respostas salvas (local)</h3>
-        <div id="responses" style="background:#fff;padding:14px;border-radius:10px;min-height:40px"></div>
-      </section>
     </div>
   </main>
 
@@ -83,51 +96,5 @@
     </div>
   </footer>
 
-  <script>
-    // simples armazenamento em localStorage
-    document.addEventListener('DOMContentLoaded', () => {
-      const form = document.getElementById('surveyForm');
-      const responsesEl = document.getElementById('responses');
-      const thanks = document.getElementById('thanks');
-      const clearBtn = document.getElementById('clearBtn');
-
-      function renderResponses() {
-        const data = JSON.parse(localStorage.getItem('forca_enquetes') || '[]');
-        if (!data.length) { responsesEl.innerHTML = '<em>Nenhuma resposta ainda.</em>'; return; }
-        responsesEl.innerHTML = data.map((r, i) =>
-          `<div style="padding:8px;border-bottom:1px solid #f0eef6">
-            <strong>#${i + 1}</strong> — <small style="color:#666">${new Date(r.ts).toLocaleString()}</small>
-            <div><strong>Evento:</strong> ${r.q1 || '—'}</div>
-            <div><strong>Oficinas:</strong> ${r.q2.length ? r.q2.join(', ') : '—'}</div>
-            <div><strong>Sugestão:</strong> ${r.q3 || '—'}</div>
-          </div>`).join('');
-      }
-
-      form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const q1 = document.getElementById('q1').value;
-        const q2 = Array.from(form.querySelectorAll('input[name="q2"]:checked')).map(i => i.value);
-        const q3 = document.getElementById('q3').value.trim();
-
-        const data = JSON.parse(localStorage.getItem('forca_enquetes') || '[]');
-        data.unshift({ q1, q2, q3, ts: Date.now() });
-        localStorage.setItem('forca_enquetes', JSON.stringify(data.slice(0, 50))); // keep up to 50
-        thanks.style.display = 'block';
-        setTimeout(() => { thanks.style.display = 'none' }, 2500);
-        form.reset();
-        renderResponses();
-      });
-
-      clearBtn.addEventListener('click', () => {
-        if (confirm('Limpar respostas salvas no navegador?')) {
-          localStorage.removeItem('forca_enquetes');
-          renderResponses();
-        }
-      });
-
-      renderResponses();
-    });
-  </script>
 </body>
-
 </html>
