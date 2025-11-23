@@ -82,18 +82,6 @@ function restartInterval() {
 startInterval();
 
 /* -----------------
-   ALERTA DO FORMULÁRIO
+   FORMULÁRIOS (nenhum alerta feio aqui!)
 --------------------*/
-const form = document.querySelector("form");
-
-if (form) {
-  form.addEventListener("submit", (event) => {
-    event.preventDefault(); // impede redirecionamento
-
-    // Mostra o alerta personalizado
-    alert("✔ Sua resposta foi enviada com sucesso!");
-
-    // Depois envia o formulário realmente
-    event.target.submit();
-  });
-}
+/* REMOVIDO o código que gerava o alert() */

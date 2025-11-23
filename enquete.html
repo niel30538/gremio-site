@@ -39,15 +39,8 @@
     }
 
     @keyframes pop {
-      0% {
-        transform: scale(.8);
-        opacity: 0;
-      }
-
-      100% {
-        transform: scale(1);
-        opacity: 1;
-      }
+      0% { transform: scale(.8); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
     }
 
     .popup-title {
@@ -67,78 +60,27 @@
       cursor: pointer;
       font-weight: bold;
     }
-    /* --- MENU MOBILE FLUTUANTE BONITO E MODERNO --- */
-@media (max-width: 680px) {
-
-    #menu-toggle {
-        display: block;
-    }
-
-    .navbar {
-        display: none;
-    }
-
-    .navbar.active {
-        display: flex !important;
-        flex-direction: column;
-
-        /* posição mais elegante */
-        position: absolute;
-        top: 68px;
-        right: 16px;
-
-        /* largura bonita */
-        width: 78%;
-        max-width: 340px;
-
-        /* estilo premium */
-        background: linear-gradient(180deg, #8e33d3, #6d1aa8 80%);
-        padding: 26px 0;
-        gap: 22px;
-        text-align: center;
-
-        border-radius: 20px;
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.28);
-
-        z-index: 999;
-
-        /* animação premium */
-        transform: translateY(-14px) scale(0.93);
-        opacity: 0;
-        animation: menuSlide 0.28s ease forwards;
-    }
-
-    @keyframes menuSlide {
-        to {
-            transform: translateY(0) scale(1);
-            opacity: 1;
-        }
-    }
-
-    .navbar.active a {
-        font-size: 1.18rem;
-        font-weight: 600;
-        color: #fff;
-        padding: 12px 0;
-        letter-spacing: 0.6px;
-        transition: opacity 0.18s;
-    }
-
-    .navbar.active a:hover {
-        opacity: 0.7;
-    }
-}
-
   </style>
 </head>
+<script>
+function mostrarNome(mostrar) {
+  const campo = document.getElementById("campoNome");
+  campo.style.display = mostrar ? "block" : "none";
 
+  // se for anônimo, limpa o nome
+  if (!mostrar) {
+    const input = campo.querySelector("input");
+    input.value = "";
+  }
+}
+</script>
 <body>
   <header>
     <div class="header-inner">
-      <a class="brand" href="">
+      <div class="brand">
         <img src="imagens/logo.png" alt="Logo" class="logo-image">
         <span class="brand-text">FORÇA ESTUDANTIL</span>
-      </a>
+      </div>
 
       <nav class="navbar">
         <a href="index.html">INÍCIO</a>
@@ -153,50 +95,48 @@
   <main style="margin-top:80px;padding:26px;">
     <div class="container" style="max-width:800px;margin:0 auto;">
       <h1 style="color:var(--purple-700)">Enquete — Participe</h1>
-      <p style="color:var(--muted)">
-        Responda a enquete abaixo — suas respostas serão enviadas diretamente para nossa equipe.
-      </p>
+      <p style="color:var(--muted)">Responda as perguntas abaixo. Sua opinião é muito importante para nós.</p>
 
-      <!-- FORMULÁRIO AJAX -->
-      <form id="enqueteForm" action="https://formsubmit.co/ajax/gestudantil39@gmail.com" method="POST"
-        style="margin-top:18px;background:var(--card);padding:18px;border-radius:12px;box-shadow:var(--shadow)">
+ <!-- FORMULÁRIO AJAX -->
+<form id="enqueteForm" action="https://formsubmit.co/ajax/gestudantil39@gmail.com" method="POST"
+  style="margin-top:18px;background:var(--card);padding:18px;border-radius:12px;box-shadow:var(--shadow)">
 
-        <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_subject" value="Nova resposta da Enquete do Grêmio!">
+  <input type="hidden" name="_captcha" value="false">
+  <input type="hidden" name="_subject" value="Nova resposta da Enquete do Grêmio!">
 
-        <label style="display:block;margin-bottom:12px">
-          <strong>1) Qual evento você prefere?</strong><br>
-          <select name="evento_preferido" required
-            style="margin-top:8px;padding:10px;border-radius:8px;width:100%;border:1px solid #e6e2ef">
-            <option value="">Escolha...</option>
-            <option>Arraial</option>
-            <option>Feira Cultural</option>
-            <option>Torneio de Esportes</option>
-            <option>Oficinas</option>
-          </select>
-        </label>
+  <!-- PERGUNTA 1 -->
+  <label style="display:block;margin-bottom:16px">
+    <strong>1) Você prefere se identificar ou responder anonimamente?</strong><br><br>
 
-        <label style="display:block;margin-bottom:12px">
-          <strong>2) Você gostaria de oficinas de:</strong><br>
+    <label><input type="radio" name="identificacao" value="Quero me identificar" required onclick="mostrarNome(true)"> Quero me identificar</label><br>
+    <label><input type="radio" name="identificacao" value="Prefiro responder anonimamente" required onclick="mostrarNome(false)"> Prefiro responder anonimamente</label>
+  </label>
 
-          <label><input type="checkbox" name="oficinas[]" value="Música"> Música</label><br>
-          <label><input type="checkbox" name="oficinas[]" value="Programação"> Programação</label><br>
-          <label><input type="checkbox" name="oficinas[]" value="Arte"> Arte</label><br>
-          <label><input type="checkbox" name="oficinas[]" value="Esportes"> Esportes</label>
+  <!-- CAMPO DE NOME (inicialmente escondido) -->
+  <div id="campoNome" style="display:none; margin-bottom:16px;">
+    <label>
+      <strong>Seu nome:</strong><br>
+      <input type="text" name="nome" placeholder="Digite seu nome"
+        style="margin-top:8px;padding:10px;width:100%;border-radius:8px;border:1px solid #e6e2ef;">
+    </label>
+  </div>
 
-        </label>
+  <!-- PERGUNTA 2 -->
+  <label style="display:block;margin-bottom:12px">
+    <strong>2) O que podemos melhorar na escola?</strong><br>
+    <textarea name="sugestao" rows="4"
+      style="width:100%;padding:8px;border-radius:8px;border:1px solid #e6e2ef;margin-top:8px"
+      required></textarea>
+  </label>
 
-        <label style="display:block;margin-bottom:12px">
-          <strong>3) O que podemos melhorar na escola?</strong><br>
-          <textarea name="sugestao" rows="4"
-            style="width:100%;padding:8px;border-radius:8px;border:1px solid #e6e2ef;margin-top:8px"></textarea>
-        </label>
+  <div style="display:flex;gap:12px;align-items:center;margin-top:12px">
+    <button type="submit" class="btn-primary">Enviar respostas</button>
+    <button type="reset"
+      style="background:#fff;border:1px solid #eee;padding:10px;border-radius:8px;cursor:pointer">Limpar</button>
+  </div>
 
-        <div style="display:flex;gap:12px;align-items:center;margin-top:12px">
-          <button type="submit" class="btn-primary">Enviar respostas</button>
-          <button type="reset"
-            style="background:#fff;border:1px solid #eee;padding:10px;border-radius:8px;cursor:pointer">Limpar</button>
-        </div>
+</form>
+
 
       </form>
 
@@ -219,7 +159,7 @@
     </div>
   </div>
 
-  <!-- SCRIPT AJAX (CORRIGIDO) -->
+  <!-- SCRIPT AJAX -->
   <script>
     const enqueteForm = document.getElementById('enqueteForm');
     const popup = document.getElementById('popupSucesso');
@@ -243,7 +183,6 @@
     }
   </script>
 
-  <!-- MENU MOBILE -->
   <script src="script.js"></script>
 
 </body>
