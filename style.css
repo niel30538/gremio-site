@@ -371,3 +371,27 @@ footer {
         border-radius: 12px
     }
 }
+
+/* --- MENU MOBILE CORRIGIDO --- */
+@media(max-width:680px) {
+
+    .navbar.active {
+        display: flex !important;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        right: 0;
+        width: 100%;
+        background: linear-gradient(90deg, var(--purple-600), var(--purple-700));
+        padding: 16px 0;
+        gap: 14px;
+        text-align: center;
+        z-index: 999;
+        box-shadow: 0 6px 16px rgba(0,0,0,0.18);
+    }
+
+    .navbar.active a {
+        padding: 12px 0;
+        width: 100%;
+    }
+}

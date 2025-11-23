@@ -7,6 +7,7 @@
   <title>Enquete — Força Estudantil</title>
   <link rel="shortcut icon" href="imagens/logo.png" type="image/png">
   <link rel="stylesheet" href="style.css">
+  <script src="script.js"></script>
 
   <!-- ESTILO DO POPUP -->
   <style>
@@ -150,13 +151,13 @@
     </div>
   </div>
 
-  <!-- SCRIPT AJAX -->
+   <!-- SCRIPT AJAX -->
   <script>
     const form = document.getElementById('enqueteForm');
     const popup = document.getElementById('popupSucesso');
 
     form.addEventListener('submit', async (e) => {
-      e.preventDefault(); // impedir redirecionamento
+      e.preventDefault();
 
       const formData = new FormData(form);
 
@@ -165,7 +166,7 @@
         body: formData
       });
 
-      popup.classList.add('active'); // mostrar popup
+      popup.classList.add('active');
       form.reset();
     });
 
@@ -173,6 +174,9 @@
       popup.classList.remove('active');
     }
   </script>
+
+  <!-- IMPORTANTE: FAZ O MENU FUNCIONAR -->
+  <script src="script.js"></script>
 
 </body>
 </html>
