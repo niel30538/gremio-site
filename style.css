@@ -340,10 +340,16 @@ footer {
 
 .footer-link {
     text-decoration: none;
-    color: var(--white);
-    background: rgba(255, 255, 255, 0.08);
-    padding: 8px 12px;
-    border-radius: 8px
+    color: white;
+    background: linear-gradient(90deg, var(--pink-400), var(--purple-600));
+    padding: 8px 14px;
+    border-radius: 10px;
+    font-weight: 600;
+    transition: opacity .18s ease;
+}
+
+.footer-link:hover {
+    opacity: 0.85;
 }
 
 /* Responsivo */
@@ -411,3 +417,4 @@ body {
     font-family: 'Segoe UI', Roboto, system-ui, -apple-system;
     background: linear-gradient(180deg, #f6f3fb 0%, var(--bg) 100%);
     color: #111827; }
+    
