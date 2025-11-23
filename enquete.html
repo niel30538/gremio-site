@@ -7,7 +7,6 @@
   <title>Enquete — Força Estudantil</title>
   <link rel="shortcut icon" href="imagens/logo.png" type="image/png">
   <link rel="stylesheet" href="style.css">
-  <script src="script.js"></script>
 
   <!-- ESTILO DO POPUP -->
   <style>
@@ -40,8 +39,15 @@
     }
 
     @keyframes pop {
-      0% { transform: scale(.8); opacity: 0; }
-      100% { transform: scale(1); opacity: 1; }
+      0% {
+        transform: scale(.8);
+        opacity: 0;
+      }
+
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
     }
 
     .popup-title {
@@ -71,11 +77,13 @@
         <img src="imagens/logo.png" alt="Logo" class="logo-image">
         <span class="brand-text">FORÇA ESTUDANTIL</span>
       </a>
+
       <nav class="navbar">
         <a href="index.html">INÍCIO</a>
         <a href="index.html#sobre">INTEGRANTES</a>
         <a href="https://www.instagram.com/gremiofestudantil/" target="_blank">CONTATO</a>
       </nav>
+
       <button id="menu-toggle" aria-label="Abrir menu">☰</button>
     </div>
   </header>
@@ -88,9 +96,7 @@
       </p>
 
       <!-- FORMULÁRIO AJAX -->
-      <form id="enqueteForm"
-        action="https://formsubmit.co/ajax/gestudantil39@gmail.com"
-        method="POST"
+      <form id="enqueteForm" action="https://formsubmit.co/ajax/gestudantil39@gmail.com" method="POST"
         style="margin-top:18px;background:var(--card);padding:18px;border-radius:12px;box-shadow:var(--shadow)">
 
         <input type="hidden" name="_captcha" value="false">
@@ -151,13 +157,13 @@
     </div>
   </div>
 
-   <!-- SCRIPT AJAX -->
+  <!-- SCRIPT AJAX -->
   <script>
     const form = document.getElementById('enqueteForm');
     const popup = document.getElementById('popupSucesso');
 
     form.addEventListener('submit', async (e) => {
-      e.preventDefault();
+      e.preventDefault(); // impedir redirecionamento
 
       const formData = new FormData(form);
 
@@ -166,7 +172,7 @@
         body: formData
       });
 
-      popup.classList.add('active');
+      popup.classList.add('active'); // mostrar popup
       form.reset();
     });
 
@@ -175,8 +181,9 @@
     }
   </script>
 
-  <!-- IMPORTANTE: FAZ O MENU FUNCIONAR -->
+  <!-- MENU MOBILE (carregado no final para funcionar) -->
   <script src="script.js"></script>
 
 </body>
+
 </html>
