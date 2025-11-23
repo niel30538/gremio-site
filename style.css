@@ -19,10 +19,17 @@
     padding: 0;
 }
 
-html,
-body {
-    height: auto;
+/* EVITAR ESPAÇO EM BRANCO NO FINAL DA PÁGINA */
+html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
 }
+
+main {
+    flex: 1;
+}
+
 
 body {
     font-family: 'Segoe UI', Roboto, system-ui, -apple-system;
@@ -31,6 +38,8 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     line-height: 1.45;
+     display: flex;
+    flex-direction: column;
 }
 
 /* HEADER */
@@ -373,7 +382,15 @@ footer {
 }
 
 /* --- MENU MOBILE CORRIGIDO --- */
-@media(max-width:680px) {
+@media(max-width: 680px) {
+
+    #menu-toggle {
+        display: block;
+    }
+
+    .navbar {
+        display: none;
+    }
 
     .navbar.active {
         display: flex !important;
@@ -389,44 +406,8 @@ footer {
         z-index: 999;
         box-shadow: 0 6px 16px rgba(0,0,0,0.18);
     }
-
-    .navbar.active a {
-        padding: 12px 0;
-        width: 100%;
-    }
 }
-
-/* MENU MOBILE — funciona em todos os tamanhos abaixo de 680px */
-@media (max-width: 680px) {
-
-  /* Esconde o menu inicialmente */
-  .navbar {
-    display: none;
-    flex-direction: column;
-    position: absolute;
-    top: 60px;
-    right: 0;
-    width: 100%;
-    background: linear-gradient(90deg, var(--purple-600), var(--purple-700));
-    padding: 16px 0;
-    text-align: center;
-    z-index: 999;
-    box-shadow: 0 6px 16px rgba(0,0,0,0.18);
-  }
-
-  /* Mostra quando o botão ativa */
-  .navbar.active {
-    display: flex !important;
-    gap: 14px;
-  }
-
-  .navbar a {
-    padding: 12px 0;
-    width: 100%;
-  }
-
-  /* Mostra o botão hamburguer */
-  #menu-toggle {
-    display: block;
-  }
-}
+body {
+    font-family: 'Segoe UI', Roboto, system-ui, -apple-system;
+    background: linear-gradient(180deg, #f6f3fb 0%, var(--bg) 100%);
+    color: #111827; }
